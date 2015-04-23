@@ -1,6 +1,11 @@
 Moodstocks Cordova Plugin
 =========================
 
+Warning
+--------
+
+**Under active development, and not production ready**
+
 Note
 ----
 
