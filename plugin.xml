@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+		id="jp.wizcorp.moodstocks"
+		version="0.0.1">
+
+  <name>Moodstocks</name>
+
+  <engines>
+	<engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/moodstocks.js" target="js/moodstocks.js"/>
+
+  <js-module src="www/moodstocks.js" name="moodstocks">
+	<clobbers target="moodstocks" />
+  </js-module>
+
+  <platform name="android">
+	<config-file target="res/xml/config.xml" parent="/*">
+	  <feature name="MoodstocksPlugin">
+		<param name="android-package" value="jp.wizcorp.moodstocks.Moodstocks"/>
+	  </feature>
+	</config-file>
+
+	<config-file target="AndroidManifest.xml" parent="/manifest">
+		<uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.CAMERA" />
+		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+		<uses-feature android:name="android.hardware.camera" android:required="false" />
+		<uses-feature android:name="android.hardware.camera.any" android:required="false" />
+	</config-file>
+
+	<config-file target="AndroidManifest.xml" parent="/manifest/application">
+		<activity android:name="jp.wizcorp.moodstocks.ScanActivity" android:configChanges="orientation|screenSize" />
+	</config-file>
+
+	<!-- libs -->
+	<source-file src="src/android/libs/moodstocks.jar" target-dir="libs" />
+	<source-file src="src/android/libs/armeabi/libjmoodstocks-sdk-core-armv6.so" target-dir="libs/armeabi/" />
+	<source-file src="src/android/libs/armeabi/libjmoodstocks-sdk.so" target-dir="libs/armeabi/" />
+	<source-file src="src/android/libs/armeabi-v7a/libjmoodstocks-sdk-core-armv7-neon.so" target-dir="libs/armeabi-v7a/" />
+	<source-file src="src/android/libs/armeabi-v7a/libjmoodstocks-sdk-core-armv7.so" target-dir="libs/armeabi-v7a/" />
+	<source-file src="src/android/libs/armeabi-v7a/libjmoodstocks-sdk.so" target-dir="libs/armeabi-v7a/" />
+	<source-file src="src/android/libs/mips/libjmoodstocks-sdk.so" target-dir="libs/mips/" />
+	<source-file src="src/android/libs/x86/libjmoodstocks-sdk-core-x86.so" target-dir="libs/x86/" />
+	<source-file src="src/android/libs/x86/libjmoodstocks-sdk.so" target-dir="libs/x86/" />
+
+	<!-- activities -->
+	<source-file src="src/android/scan.xml" target-dir="res/layout" />
+
+	<!-- source code -->
+	<source-file src="src/android/ScanActivity.java" target-dir="src/jp/wizcorp/moodstocks/"/>
+	<source-file src="src/android/SyncProgress.java" target-dir="src/jp/wizcorp/moodstocks/"/>
+	<source-file src="src/android/Moodstocks.java" target-dir="src/jp/wizcorp/moodstocks/"/>
+  </platform>
+
+  <platform name="ios">
+	<config-file target="config.xml" parent="/*">
+	  <feature name="MoodstocksPlugin">
+		<param name="ios-package" value="MoodstocksPlugin" />
+	  </feature>
+	</config-file>
+
+	<framework src="CoreMedia.framework" />
+	<framework src="AVFoundation.framework" />
+	<framework src="CoreVideo.framework" />
+	<framework src="QuartzCore.framework" />
+	<framework src="src/ios/Moodstocks.framework" custom="true" />
+
+	<!-- source files -->
+	<header-file src="src/ios/Bridging-Header.h" />
+	<source-file src="src/ios/MoodstocksPlugin.swift" />
+	<source-file src="src/ios/MoodstocksScannerViewController.swift" />
+  </platform>
+</plugin>
